@@ -14,7 +14,7 @@
   import WhatsappIcon from '../assets/image/whatsapp.svg'
   import YoutubeIcon from '../assets/image/youtube.svg'
   import SkypeIcon from '../assets/image/skype.svg'
-  import DribbbleIcon from '../assets/image/dribble.svg'
+  import DribbbleIcon from '../assets/image/dribbble.svg'
   export default {
     name: 'SvgIcon',
     props: {

@@ -73,7 +73,7 @@
               <span
                 style="width: 20px; height:20px; display: inline-block; padding: 4px; border-radius: 3px; box-sizing: border-box; margin: 10px 3px 0 0;"
                 :style="{
-                  background: options.color.main,
+                  backgroundColor: options.color.main,
                   backgroundImage: `url(https://www.mechanikadesign.com/sigmark/icons/${item.icon}.png)`,
                   backgroundSize: '12px',
                   backgroundPosition: 'center center',
