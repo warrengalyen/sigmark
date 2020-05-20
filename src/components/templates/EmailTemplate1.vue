@@ -119,7 +119,6 @@
                         >
                           <img
                             width="12px"
-                            height="12px"
                             :src="`https://www.mechanikadesign.com/sigmark/icons/${item.icon}.png`"
                             alt=""
                             style="vertical-align: middle;"
