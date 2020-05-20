@@ -15,6 +15,8 @@
   import YoutubeIcon from '../assets/image/youtube.svg'
   import SkypeIcon from '../assets/image/skype.svg'
   import DribbbleIcon from '../assets/image/dribbble.svg'
+  import StackoverflowIcon from '../assets/image/stackoverflow.svg'
+
   export default {
     name: 'SvgIcon',
     props: {
@@ -33,8 +35,10 @@
       BehanceIcon,
       YoutubeIcon,
       SkypeIcon,
-      DribbbleIcon
+      DribbbleIcon,
+      StackoverflowIcon
     },
+
     data () {
       return {
         selected: `${this.icon}Icon`
