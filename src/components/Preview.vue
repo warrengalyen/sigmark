@@ -84,6 +84,9 @@
         <heart-icon/>by
         <a href="https://www.mechanikadesign.com">Warren Galyen</a>
       </div>
+      <div class="version">
+        <span>current version:&nbsp;{{ version }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -105,7 +108,8 @@
       return {
         html: '',
         showSetup: false,
-        showSource: false
+        showSource: false,
+        version: require('../../package.json').version
       }
     },
     computed: {
@@ -270,5 +274,10 @@
       width: 24px;
       fill: orange;
     }
+  }
+  .version {
+    color: #aaa;
+    margin-top: 10px;
+    font-size: 12px;
   }
 </style>
