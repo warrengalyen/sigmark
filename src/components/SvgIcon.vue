@@ -16,6 +16,7 @@
   import SkypeIcon from '../assets/image/skype.svg'
   import DribbbleIcon from '../assets/image/dribbble.svg'
   import StackoverflowIcon from '../assets/image/stackoverflow.svg'
+  import XingIcon from '../assets/image/xing.svg'
 
   export default {
     name: 'SvgIcon',
@@ -36,7 +37,8 @@
       YoutubeIcon,
       SkypeIcon,
       DribbbleIcon,
-      StackoverflowIcon
+      StackoverflowIcon,
+      XingIcon
     },
 
     data () {
