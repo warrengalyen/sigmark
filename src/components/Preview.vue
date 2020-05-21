@@ -99,6 +99,7 @@
   import { mapGetters } from 'vuex';
   import EmailTemplate1 from './templates/EmailTemplate1';
   import EmailTemplate2 from './templates/EmailTemplate2'
+  import EmailTemplate3 from './templates/EmailTemplate3';
   import HeartIcon from '../assets/image/heart.svg';
   import CoffeeIcon from '../assets/image/coffee-cup.svg';
 
@@ -109,6 +110,8 @@
       EmailTemplate1,
       // eslint-disable-next-line
       EmailTemplate2,
+      // eslint-disable-next-line
+      EmailTemplate3,
       HeartIcon,
       CoffeeIcon
     },
