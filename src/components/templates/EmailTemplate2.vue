@@ -52,11 +52,25 @@
           </tr>
         </table>
       </tr>
-      <!-- Avatar field -->
-      <tr style="vertical-align: top;">
+      </tbody>
+    </table>
+    <table
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      role="presentation"
+      style="font-family: Arial, Helvetica, sans-serif; line-height: 1.5"
+      :style="{
+        fontSize: options.font.size + 'px',
+        fontFamily: options.font.family
+      }"
+    >
+      <tbody>
+      <tr>
+        <!-- Avatar field -->
         <td
           v-if="showAvatar"
-          style="padding-top: 8px;"
+          style="padding-top: 8px; vertical-align: top;"
         >
           <img
             v-if="image"
@@ -78,11 +92,16 @@
               }"
           />
         </td>
-        <td style="margin: 0; padding-top: 8px">
+        <td style="padding-top: 8px; vertical-align: top;">
           <table
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            role="presentation"
             style="margin: 0;"
             :style="{fontSize: `${options.font.size + 1}px`}"
           >
+            <tbody>
             <!-- Phone number field -->
             <tr>
               <td>
@@ -92,17 +111,17 @@
             <!-- Email address & website fields -->
             <tr>
               <td>
-                  <span>
-                    <a
-                      style="text-decoration: none; color: inherit;"
-                      :href="`mailto:${otherFields[1].value}`"
-                    >{{ otherFields[1].value }}</a> -
-                    <a
-                      style="text-decoration: none; color: inherit;"
-                      :href="`${formatLink(otherFields[0].value
-                      )}`"
-                    >{{ formatLink(otherFields[0].value) }}</a>
-                  </span>
+                    <span>
+                      <a
+                        style="text-decoration: none; color: inherit;"
+                        :href="`mailto:${otherFields[1].value}`"
+                      >{{ otherFields[1].value }}</a> -
+                      <a
+                        style="text-decoration: none; color: inherit;"
+                        :href="`${formatLink(otherFields[0].value
+                        )}`"
+                      >{{ formatLink(otherFields[0].value) }}</a>
+                    </span>
               </td>
             </tr>
             <!-- Other fields -->
@@ -144,8 +163,8 @@
                       align="center"
                       style="width: 24px; height: 24px; border-radius: 3px;"
                       :style="{
-                            backgroundColor: options.color.mainPreview || options.color.main,
-                          }"
+                              backgroundColor: options.color.mainPreview || options.color.main,
+                            }"
                     >
                       <a :href="formatLink(item.link)">
                         <img
@@ -161,6 +180,7 @@
                 </table>
               </td>
             </tr>
+            </tbody>
           </table>
         </td>
       </tr>
