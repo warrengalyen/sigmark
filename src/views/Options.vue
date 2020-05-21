@@ -11,17 +11,17 @@
           @active-change="onPreviewSecondaryColor"
         ></el-color-picker>
       </el-form-item>
-      <el-form-item label="Avatar Visibility">
-        <el-switch
-          v-model="avatarHidden"
-          active-text="Avatar Hidden"
-          inactive-text="Avatar Visible">
-        </el-switch>
+      <el-form-item label="Show Avatar">
+        <el-switch v-model="showAvatar"></el-switch>
       </el-form-item>
       <el-collapse-transition>
-        <div v-if="!avatarHidden">
-          <el-form-item label="Avatar size" >
-            <el-slider v-model="avatarSize" :min="attributes.avatar.min" :max="attributes.avatar.max"></el-slider>
+        <div v-if="showAvatar">
+          <el-form-item label="Avatar size">
+            <el-slider
+              v-model="avatarSize"
+              :min="attributes.avatar.min"
+              :max="attributes.avatar.max"
+            ></el-slider>
           </el-form-item>
           <el-form-item label="Avatar shape">
             <el-select v-model="avatarShape">
@@ -141,12 +141,12 @@
           this.$store.dispatch('updateAvatar', { roundness: v })
         }
       },
-      avatarHidden: {
+      showAvatar: {
         get () {
-          return this.options.avatar.hidden
+          return this.options.avatar.show
         },
         set (v) {
-          this.$store.dispatch('updateAvatar', { hidden: v })
+          this.$store.dispatch('updateAvatar', { show: v })
         }
       },
       avatarSize: {
