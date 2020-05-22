@@ -109,7 +109,8 @@
         fileBase64: '',
         imageLink: '',
         showDialog: false,
-        showAlert: false
+        showAlert: false,
+        isLt10: false
       }
     },
     created () {
@@ -165,11 +166,11 @@
       onBeforeUpload (file) {
         const isJPG = file.type === 'image/jpeg'
         const isPNG = file.type === 'image/png'
-        const isLt10 = file.size < 10000
-        if (!isLt10) {
+        this.isLt10 = file.size < 10000
+        if (!this.isLt10) {
           this.$message({
-            message: 'Error, uploaded file should not be more than 10KB.',
-            type: 'error'
+            message: 'Warning, uploaded file is more than 10KB, and will be compressed.',
+            type: 'warning'
           })
         }
         if (!isJPG && !isPNG) {
@@ -178,14 +179,57 @@
             type: 'error'
           })
         }
-        return isLt10
+        return true
       },
       onChange (file, fileList) {
         this.fileList = fileList
       },
       async upload (data) {
         this.fileBase64 = await this.getBase64ImageFromBlob(data.file)
+        if (!this.isLt10) {
+          this.fileBase64 = await this.compressImage(this.fileBase64)
+        }
         this.$store.dispatch('updateImage', { base64: this.fileBase64 })
+      },
+      async compressImage (base64) {
+        const canvas = document.createElement('canvas')
+        const img = document.createElement('img')
+
+        return new Promise((resolve, reject) => {
+          img.onload = function() {
+            let width = img.width
+            let height = img.height
+
+            const maxHeight = 200
+            const maxWidth = 200
+
+            if (width > height) {
+              if (width > maxWidth) {
+                height = Math.round(height *= maxWidth / width)
+                width = maxWidth
+              }
+            } else {
+              if (height > maxHeight) {
+                width = Math.round(width *= maxHeight / height)
+                height = maxHeight
+              }
+            }
+
+            canvas.width = width
+            canvas.height = height
+
+            const ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0, width, height)
+
+            resolve(canvas.toDataURL('image/jpeg', 0.7))
+          }
+
+          img.onerror = function(err) {
+            reject(err)
+          }
+
+          img.src = base64
+        })
       },
       getBase64ImageFromBlob (blob) {
         return new Promise((resolve, reject) => {
