@@ -152,7 +152,7 @@
         })
       },
       onAddLink () {
-        this.$store.dispatch('updateImage', { link: this.imageLink })
+        this.$store.dispatch('updateImage', { link: this.imageUrl })
       },
       onClearImage () {
         this.$refs.upload.clearFiles()
