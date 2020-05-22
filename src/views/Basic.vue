@@ -12,7 +12,6 @@
               :http-request="upload"
               :before-upload="onBeforeUpload"
               :multiple="false"
-              :limit="1"
               :show-file-list="false"
             >
               <div slot="trigger">
