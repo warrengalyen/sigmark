@@ -152,12 +152,12 @@
         })
       },
       onAddLink () {
-        this.$store.dispatch('updateImage', { link: this.imageUrl })
+        this.$store.dispatch('updateImage', { base64: '', link: this.imageUrl })
       },
       onClearImage () {
         this.$refs.upload.clearFiles()
         this.fileBase64 = ''
-        this.$store.dispatch('updateImage', { base64: this.fileBase64 })
+        this.$store.dispatch('updateImage', { base64: this.fileBase64, link: '' })
       },
       onClearImageLink () {
         this.imageLink = ''
