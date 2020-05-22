@@ -97,7 +97,7 @@
               </td>
             </tr>
             <!-- Social icons -->
-            <tr>
+            <tr v-if="socials.installed.length">
               <td>
                 <table
                   cellspacing="2"
@@ -120,7 +120,7 @@
                       <a :href="formatLink(item.link)">
                         <img
                           width="12px"
-                          :src="`https://s3.eu-central-1.amazonaws.com/mysigmail/icons/${item.icon}.png`"
+                          :src="`https://www.mechanikadesign.com/sigmark/icons/${item.icon}.png`"
                           :alt="`social-icon-${item.icon}`"
                           style="display: table-cell; vertical-align: middle;"
                         >
@@ -138,6 +138,37 @@
       </tbody>
     </table>
     <!-- Addons -->
+    <table
+      v-if="isAdded('mobileApp')"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      role="presentation"
+      style="margin-top: 10px;"
+    >
+      <tbody>
+      <tr>
+        <td v-if="addons.mobileApp.appStore.link">
+          <a :href="addons.mobileApp.appStore.link">
+            <img
+              :src="addons.mobileApp.appStore.img"
+              style="height:35px; margin-right: 5px;"
+              alt="app store badge"
+            >
+          </a>
+        </td>
+        <td v-if="addons.mobileApp.googlePlay.link">
+          <a :href="addons.mobileApp.googlePlay.link">
+            <img
+              :src="addons.mobileApp.googlePlay.img"
+              style="height:35px;"
+              alt="google play badge"
+            >
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
     <table
       v-if="isAdded('disclaimer')"
       role="presentation"
