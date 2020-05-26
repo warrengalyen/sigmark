@@ -270,7 +270,7 @@
         const bucket = new S3({
           accessKeyId: process.env.VUE_APP_AWS_S3_ID,
           secretAccessKey: process.env.VUE_APP_AWS_S3_KEY,
-          region: 'us-west-2'
+          region: process.env.VUE_APP_AWS_S3_REGION
         })
         const name = this.fileRaw.name
         const ext = name.match(/.jpg|.jpeg|.png$/i)[0]
