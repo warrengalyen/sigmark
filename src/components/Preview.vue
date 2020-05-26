@@ -58,7 +58,7 @@
           class="email-preview"
         >
           <component
-            :is="selectTemplate"
+            :is="signatureTemplate"
             ref="template"
           />
         </div>
@@ -141,17 +141,25 @@
           placement="top"
           width="260"
         >
-          <p>Sigmark is a free project that developed by myself without funding.</p>
-          <p>If you liked the project, you may donate to support development and help it grow 🌱</p>
+          <p>MySigMail is a free & open source project that develops one person without funding.</p>
+          <p>If you liked the project, you may donate to support development and grow up 🌱</p>
           <ul>
             <li><a
-              href="https://www.paypal.me/warrengalyen"
+              href="https://www.paypal.me/antonreshetov"
               target="_blank"
             >PayPal</a></li>
+            <li><a
+              href="https://www.patreon.com/antonreshetov"
+              target="_blank"
+            >Patreon</a></li>
+            <li><a
+              href="https://opencollective.com/mysigmail"
+              target="_blank"
+            >Open Collective</a></li>
           </ul>
-          <p>Or just share the project with your friends.</p>
-          <p>Are You a blogger? Please spread word about the project to subscribers.</p>
-          <p>You can <span
+          <p>Or just share the project to your friends.</p>
+          <p>You a blogger? Please tell about the project to subscribers.</p>
+          <p>Finally, you can <span
             :class="{'link': !template.promoteSignature}"
             @click="togglePromo(true)"
           >leave</span> a promotional message in the signature, or <span
@@ -163,12 +171,20 @@
             class="support-shield"
             @click="onClickHelp"
           >
-            Help project grow
+            Help to grow project
           </div>
         </el-popover>
       </div>
       <div class="version">
         <span>current version:&nbsp;{{ version }}</span>
+        <span>
+          <a
+            href="https://github.com/antonreshetov/mysigmail"
+            target="_blank"
+          >
+            <github-icon />
+          </a>
+        </span>
       </div>
     </div>
   </div>
@@ -176,12 +192,13 @@
 
 <script>
   import { mapGetters, mapState } from 'vuex'
-  import EmailTemplate1 from './templates/EmailTemplate1'
+  import CarbonAd from './CarbonAd'
+  import GithubIcon from '../assets/image/github.svg'
   export default {
-    name: '',
+    name: 'Preview',
     components: {
-      // eslint-disable-next-line
-      EmailTemplate1,
+      CarbonAd,
+      GithubIcon
     },
     data () {
       return {
@@ -199,6 +216,9 @@
         options: 'getOptions',
         template: 'getTemplate'
       }),
+      signatureTemplate () {
+        return () => import(`./templates/${this.template.selected}`)
+      },
       selectTemplate: {
         get () {
           return this.template.selected
