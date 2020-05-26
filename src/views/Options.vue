@@ -1,18 +1,25 @@
 <template>
   <div class="options">
-    <el-form label-position="left" label-width="150px">
+    <el-form
+      label-position="left"
+      label-width="150px"
+    >
       <el-form-item label="Main color">
-        <el-color-picker ref="colorPicker" v-model="mainColor" @active-change="onPreviewMainColor"></el-color-picker>
+        <el-color-picker
+          ref="colorPicker"
+          v-model="mainColor"
+          @active-change="onPreviewMainColor"
+        />
       </el-form-item>
       <el-form-item label="Secondary color">
         <el-color-picker
           ref="colorPicker2"
           v-model="secondaryColor"
           @active-change="onPreviewSecondaryColor"
-        ></el-color-picker>
+        />
       </el-form-item>
-      <el-form-item label="Show Avatar">
-        <el-switch v-model="showAvatar"></el-switch>
+      <el-form-item label="Avatar">
+        <el-switch v-model="showAvatar" />
       </el-form-item>
       <el-collapse-transition>
         <div v-if="showAvatar">
@@ -21,7 +28,7 @@
               v-model="avatarSize"
               :min="attributes.avatar.min"
               :max="attributes.avatar.max"
-            ></el-slider>
+            />
           </el-form-item>
           <el-form-item label="Avatar shape">
             <el-select v-model="avatarShape">
@@ -30,7 +37,8 @@
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
-              ></el-option>
+                :disabled="item.label ==='Round' && !isImageSquare"
+              />
             </el-select>
           </el-form-item>
         </div>
@@ -47,8 +55,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-              :disabled="item.label ==='Round' && !isImageSquare"
-            ></el-option>
+            />
           </el-option-group>
         </el-select>
       </el-form-item>
@@ -59,7 +66,7 @@
             :key="item.value"
             :label="item.label"
             :value="item.value"
-          ></el-option>
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="Job separator">
@@ -69,7 +76,7 @@
             :key="item.value"
             :label="item.label"
             :value="item.value"
-          ></el-option>
+          />
         </el-select>
       </el-form-item>
     </el-form>
@@ -84,11 +91,79 @@
       return {
       }
     },
-    created () {
-      this.$ga.page(this.$router)
-    },
-    mounted () {
-      this.onCloseColorPicker()
+    computed: {
+      ...mapState(['options', 'attributes', 'projects', 'basic']),
+      mainColor: {
+        get () {
+          return this.options.color.main
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { color: { main: v } })
+          this.$store.commit('SET_COLOR', { mainPreview: undefined })
+        }
+      },
+      secondaryColor: {
+        get () {
+          return this.options.color.secondary
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { color: { secondary: v } })
+          this.$store.commit('SET_COLOR', { secondaryPreview: undefined })
+        }
+      },
+      fontSize: {
+        get () {
+          return this.options.font.size
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { font: { size: v } })
+        }
+      },
+      fontFamily: {
+        get () {
+          return this.options.font.family
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { font: { family: v } })
+        }
+      },
+      showAvatar: {
+        get () {
+          return this.options.avatar.show
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { avatar: { show: v } })
+        }
+      },
+      avatarShape: {
+        get () {
+          return this.options.avatar.roundness
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { avatar: { roundness: v } })
+        }
+      },
+      avatarSize: {
+        get () {
+          return this.options.avatar.size
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { avatar: { size: v } })
+        }
+      },
+      separator: {
+        get () {
+          return this.options.separator
+        },
+        set (v) {
+          this.$store.dispatch('updateOptions', { separator: v })
+        }
+      },
+      isImageSquare () {
+        const img = document.createElement('img')
+        img.src = this.basic.image.link
+        return img.width === img.height
+      }
     },
     watch: {
       'options.color.main' (v) {
@@ -98,79 +173,11 @@
         if (v === null) this.$store.commit('SET_COLOR', { secondary: '#000000' })
       }
     },
-    computed: {
-      ...mapState(['options', 'attributes', 'projects', 'basic']),
-      mainColor: {
-        get () {
-          return this.options.color.main
-        },
-        set (v) {
-          this.$store.dispatch('updateColor', { main: v })
-          this.$store.commit('SET_COLOR', { mainPreview: undefined })
-        }
-      },
-      secondaryColor: {
-        get () {
-          return this.options.color.secondary
-        },
-        set (v) {
-          this.$store.dispatch('updateColor', { secondary: v })
-          this.$store.commit('SET_COLOR', { secondaryPreview: undefined })
-        }
-      },
-      fontSize: {
-        get () {
-          return this.options.font.size
-        },
-        set (v) {
-          this.$store.dispatch('updateFont', { size: v })
-        }
-      },
-      fontFamily: {
-        get () {
-          return this.options.font.family
-        },
-        set (v) {
-          this.$store.dispatch('updateFont', { family: v })
-        }
-      },
-      avatarShape: {
-        get () {
-          return this.options.avatar.roundness
-        },
-        set (v) {
-          this.$store.dispatch('updateAvatar', { roundness: v })
-        }
-      },
-      showAvatar: {
-        get () {
-          return this.options.avatar.show
-        },
-        set (v) {
-          this.$store.dispatch('updateAvatar', { show: v })
-        }
-      },
-      avatarSize: {
-        get () {
-          return this.options.avatar.size
-        },
-        set (v) {
-          this.$store.dispatch('updateAvatar', { size: v })
-        }
-      },
-      separator: {
-        get () {
-          return this.options.separator
-        },
-        set (v) {
-          this.$store.dispatch('updateSeparator', v)
-        }
-      },
-      isImageSquare () {
-        const img = document.createElement('img')
-        img.src = this.basic.image.link
-        return img.width === img.height
-      }
+    created () {
+      this.$ga.page(this.$router)
+    },
+    mounted () {
+      this.onCloseColorPicker()
     },
     methods: {
       onPreviewMainColor (v) {
