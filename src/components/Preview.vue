@@ -169,7 +169,8 @@
         template: 'getTemplate'
       }),
       signatureTemplate () {
-        return () => import(`./templates/${this.template.selected}`);
+        const template = this.template.selected
+        return () => import(`./templates/${template}`)
       },
       selectTemplate: {
         get () {
