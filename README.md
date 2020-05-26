@@ -4,12 +4,12 @@
 
 ## Features
 
-- Upload image - upload image by url or embed via base64
+- Upload image - upload to AWS S3 or set public link
 - Custom fields - add custom fields
 - Social icons - add social icons
 - Options - customize signature
-- Addons - additional options (yet only one)
-- Templates - templates for signature (yet only one)
+- Addons - additional options
+- Templates - templates for signature
 - Projects - save, download or import projects
 - Signature preview - preview signature
 
@@ -20,6 +20,16 @@
 
 ## Development
 
+Set env variables
+
+```bash
+VUE_APP_AWS_S3_URL=
+VUE_APP_AWS_S3_BASKET=
+VUE_APP_AWS_S3_ID=
+VUE_APP_AWS_S3_KEY=
+```
+Run
+s
 ```bash
 npm i
 npm run serve
