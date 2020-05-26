@@ -168,7 +168,7 @@
   import { mapState } from 'vuex'
   import { guid } from '../util/helpers'
   import FieldItem from './FieldItem'
-  import AWS from 'aws-sdk'
+  import S3 from 'aws-sdk/clients/s3'
   import Cropper from 'cropperjs'
   import 'cropperjs/dist/cropper.css'
   export default {
@@ -267,7 +267,7 @@
         this.fileRaw = ''
       },
       async uploadToS3 () {
-        const bucket = new AWS.S3({
+        const bucket = new S3({
           accessKeyId: process.env.VUE_APP_AWS_S3_ID,
           secretAccessKey: process.env.VUE_APP_AWS_S3_KEY,
           region: 'us-west-2'
