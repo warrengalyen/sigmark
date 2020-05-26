@@ -154,4 +154,17 @@
       }
     }
   }
+  .success-promo {
+    text-align: center;
+  }
+  .success-promo-modal {
+    .el-dialog {
+      &__header {
+        padding-bottom: 0;
+      }
+      h1 {
+        margin-top: 0;
+      }
+    }
+  }
 </style>
