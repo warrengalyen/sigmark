@@ -159,12 +159,13 @@
             class="support-shield"
             @click="onClickHelp"
           >
-            Help project grow
+            Donate
           </div>
         </el-popover>
       </div>
       <div class="version">
-        <span>current version:&nbsp;{{ version }}</span>
+        <span><a href="mailto:contact@mechanikadesign.com">contact me</a></span>
+        <span>v{{ version }}</span>
       </div>
     </div>
   </div>
@@ -422,6 +423,10 @@
     color: #aaa;
     margin-top: 10px;
     font-size: 12px;
+
+    a {
+      color: #aaa;
+    }
 
     span {
       + span {
