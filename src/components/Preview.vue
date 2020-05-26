@@ -36,7 +36,7 @@
       <div class="actions">
         <el-button-group>
           <el-button size="small" type @click="viewSource">View source</el-button>
-          <el-button size="small" @click="copySelect">Copy as Select</el-button>
+          <el-button ref="copyHTML" size="small" @click="copySelect">Copy as Select</el-button>
           <el-button size="small" type="primary" @click="copyHTML">Copy as HTML</el-button>
         </el-button-group>
         <br>
@@ -62,7 +62,7 @@
         <p>For some email clients, like gmail, you may using simply copy/paste highlight selection. Click on "Copy as
           Select" button and paste of your signature into your email client settings.</p>
       </div>
-      <textarea ref="html" v-model="html" style="opacity: 0"></textarea>
+      <textarea ref="html" style="opacity: 0"></textarea>
     </div>
     <el-dialog title="Your email signature" :visible.sync="showSource">
       <p>Copy the HTML code below and paste it to your signature file</p>
@@ -142,12 +142,13 @@
       }
     },
     methods: {
+      parseHTML () {
+        return this.$refs.template.$el.outerHTML.replace(/<!---->/g, '')
+      },
       copyHTML () {
-        this.html = this.$refs.template.$el.outerHTML.replace( /<!---->/g, '');
-        setTimeout(() => {
-          this.$refs.html.select();
-          document.execCommand('copy');
-        }, 10);
+        this.$refs.html.innerHTML = this.parseHTML()
+        this.$refs.html.select()
+        document.execCommand('copy')
         this.gaEventClick('copy as HTML');
       },
       copySelect () {
@@ -161,7 +162,7 @@
         }
       },
       viewSource () {
-        this.html = this.$refs.template.$el.outerHTML.replace( /<!---->/g, '');
+        this.html = this.parseHTML()
         this.showSource = true;
         this.gaEventClick('view source');
       },
