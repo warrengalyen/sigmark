@@ -47,6 +47,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              :disabled="item.label ==='Round' && !isImageSquare"
             ></el-option>
           </el-option-group>
         </el-select>
@@ -98,7 +99,7 @@
       }
     },
     computed: {
-      ...mapState(['options', 'attributes', 'projects']),
+      ...mapState(['options', 'attributes', 'projects', 'basic']),
       mainColor: {
         get () {
           return this.options.color.main
@@ -164,6 +165,11 @@
         set (v) {
           this.$store.dispatch('updateSeparator', v)
         }
+      },
+      isImageSquare () {
+        const img = document.createElement('img')
+        img.src = this.basic.image.link
+        return img.width === img.height
       }
     },
     methods: {
