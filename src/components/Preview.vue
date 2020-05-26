@@ -168,21 +168,26 @@
         <span>v{{ version }}</span>
       </div>
     </div>
+    <success-promo :show.sync="showSuccessPromo" />
   </div>
 </template>
 
 <script>
   import { mapGetters, mapState } from 'vuex';
+  import SuccessPromo from './SuccessPromo'
 
   export default {
     name: 'Preview',
 
-    components: {},
+    components: {
+      SuccessPromo
+    },
     data () {
       return {
         html: '',
         showSource: false,
         showDonatePopup: false,
+        showSuccessPromo: false,
         version: require('../../package.json').version
       };
     },
@@ -217,6 +222,7 @@
         this.$refs.html.select();
         document.execCommand('copy');
         this.gaEventClick('copy as HTML');
+        this.showSuccessPromo = true
       },
       copySelect () {
         if (window.getSelection) {
@@ -226,6 +232,7 @@
           window.getSelection().addRange(range);
           document.execCommand('copy');
           this.gaEventClick('copy as select');
+          this.showSuccessPromo = true
         }
       },
       viewSource () {
@@ -237,6 +244,8 @@
         this.$refs.dialogSource.select();
         document.execCommand('copy');
         this.gaEventClick('copy source');
+        this.showSource = false
+        this.showSuccessPromo = true
       },
       onClickHelp () {
         this.gaEventClick('help open');
@@ -454,6 +463,19 @@
     h3, p {
       &:first-child {
         margin-top: 0px;
+      }
+    }
+  }
+  .success-promo {
+    text-align: center;
+  }
+  .success-promo-modal {
+    .el-dialog {
+      &__header {
+        padding-bottom: 0;
+      }
+      h1 {
+        margin-top: 0;
       }
     }
   }
