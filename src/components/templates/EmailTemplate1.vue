@@ -120,7 +120,7 @@
                       <a :href="formatLink(item.link)">
                         <img
                           width="12px"
-                          :src="`https://mechanikadesign.s3-us-west-1.amazonaws.com/sigmark/icons/${item.icon}.png`"
+                          :src="`${s3url}/icons/${item.icon}.png`"
                           :alt="`social-icon-${item.icon}`"
                           style="display: table-cell; vertical-align: middle;"
                         >
