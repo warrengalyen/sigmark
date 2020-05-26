@@ -51,8 +51,6 @@
           <div class="line long"/>
           <div class="line long full"/>
           <div class="line long full"/>
-          <div class="line long"/>
-          <div class="line long full"/>
         </div>
         <div
           ref="preview"
@@ -86,30 +84,20 @@
           </el-button>
         </el-button-group>
         <br>
-        <el-button
-          v-if="!showSetup"
-          size="small"
-          type="text"
-          @click="showSetup = !showSetup"
-        >Show setup instruction
-        </el-button>
-        <el-button
-          v-if="showSetup"
-          size="small"
-          type="text"
-          @click="showSetup = !showSetup"
-        >Hide setup instruction
-        </el-button>
-      </div>
-      <div
-        v-if="showSetup"
-        class="setup-instruction"
-      >
-        <h3>Basic usage:</h3>
-        <p>Click on "Copy as HTML" button and paste snippet of your signature into your email client settings.</p>
-        <h3>Advance usage:</h3>
-        <p>For some email clients, like gmail, you may using simply copy/paste highlight selection. Click on "Copy as
-          Select" button and paste of your signature into your email client settings.</p>
+        <el-popover
+          placement="top"
+          width="260"
+        >
+          <el-button
+            slot="reference"
+            size="small"
+            type="text"
+          >Show setup instruction</el-button>
+          <h3>Basic usage:</h3>
+          <p>Click on "Copy as HTML" button and paste snippet of your signature into your email client settings.</p>
+          <h3>Advance usage:</h3>
+          <p>For some email clients, like gmail, you may using simply copy/paste highlight selection. Click on "Copy as Select" button and paste of your signature into your email client settings.</p>
+        </el-popover>
       </div>
       <textarea
         ref="html"
@@ -192,7 +180,6 @@
     data () {
       return {
         html: '',
-        showSetup: false,
         showSource: false,
         showDonatePopup: false,
         version: require('../../package.json').version
@@ -457,5 +444,12 @@
     text-decoration: underline;
     color: $color-primary;
     cursor: pointer;
+  }
+  .el-popover {
+    h3, p {
+      &:first-child {
+        margin-top: 0px;
+      }
+    }
   }
 </style>
