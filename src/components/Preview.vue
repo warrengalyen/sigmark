@@ -104,6 +104,15 @@
         style="opacity: 0"
       />
     </div>
+    <div class="preview__footer">
+      <div class="preview__footer-inner">
+        <donate />
+        <div class="version">
+          <span><a href="mailto:contact@mechnaikadesign.com">contact me</a></span>
+          <span>v{{ version }}</span>
+        </div>
+      </div>
+    </div>
     <el-dialog
       title="Your email signature"
       :visible.sync="showSource"
@@ -127,16 +136,6 @@
         </el-button>
       </div>
     </el-dialog>
-    <div
-      v-if="true"
-      class="preview__footer"
-    >
-      <donate />
-      <div class="version">
-        <span><a href="mailto:contact@mechanikadesign.com">contact me</a></span>
-        <span>v{{ version }}</span>
-      </div>
-    </div>
     <success-promo :show.sync="showSuccessPromo" />
   </div>
 </template>
@@ -225,6 +224,8 @@
 <style lang="scss">
   @import "../assets/scss/variables.scss";
 
+  $padding-inner: 40px 50px 20px 50px;
+
   .preview {
     background-color: #f6f6f6;
     padding: 40px 50px 20px 50px;
@@ -238,12 +239,16 @@
 
     &__inner {
       max-width: 900px;
+      padding: $padding-inner;
     }
 
     &__footer {
       max-width: 900px;
       text-align: right;
       align-self: flex-end;
+      &-inner {
+        padding: $padding-inner;
+      }
     }
 
     h2 {
